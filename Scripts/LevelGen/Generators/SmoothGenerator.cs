@@ -39,7 +39,7 @@ namespace RougeLevelGen
 					var pos = new Vector2Int(i, j);
 					if (GetTile(pos) == Tile.Wall)
 					{
-						var c = LevelLevelGenerator.CountFloorNeighbors(_layer, pos, true);
+						var c = LevelGenerator.CountFloorNeighbors(_layer, pos, true);
 						if (c > 4)
 						{
 							SetTile(pos, Tile.Floor);

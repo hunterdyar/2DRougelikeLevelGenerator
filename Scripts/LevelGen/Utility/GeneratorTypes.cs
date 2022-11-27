@@ -3,6 +3,8 @@
 	public enum GeneratorTypes
 	{
 		DrunkWalk,
-		Smooth
+		Smooth,
+		Noise,
+		SimpleCellularAutomata
 	}
 }

@@ -19,10 +19,16 @@ namespace RougeLevelGen
 		private float _desiredPercentageFloors;
 		public DrunkWalkGenerator(string layer, LevelGenerator levelGenerator, int maxWalkers, float chanceToSpawnNewWalker, float chanceToDestroyWalker, float desiredPercentageFloorFill) : base(layer, levelGenerator)
 		{
+			//turns out this will crash unity lol
+			if (maxWalkers < 1)
+			{
+				maxWalkers = 1;
+			}
+			
 			this._maxWalkers = maxWalkers;
-			this._chanceToSpawnNewWalker = chanceToSpawnNewWalker;
-			this._chanceToDestroyWalker = chanceToDestroyWalker;
-			this._desiredPercentageFloors = desiredPercentageFloorFill;
+			this._chanceToSpawnNewWalker = Mathf.Clamp01(chanceToSpawnNewWalker);
+			this._chanceToDestroyWalker = Mathf.Clamp01(chanceToDestroyWalker);
+			this._desiredPercentageFloors = Mathf.Clamp01(desiredPercentageFloorFill);
 		}
 		
 
@@ -36,25 +42,29 @@ namespace RougeLevelGen
 
 		public override IEnumerator Generate()
 		{
-			while (Tiles.GetPercentageFloor() < _desiredPercentageFloors)
+			float p = Tiles.GetPercentageFloor();
+			while (p < _desiredPercentageFloors)
 			{
 				for (var i = _walkers.Count - 1; i >= 0; i--)
 				{
 					var walker = _walkers[i];
 					walker.Step();
 				}
+
+				p = Tiles.GetPercentageFloor();
+				LevelGenerator.Progress = p / _desiredPercentageFloors;
 			}
 			yield break;
 		}
 
 		public bool ShouldWalkerSpawnWalker()
 		{
-			return Random.value < _chanceToSpawnNewWalker;
+			return LevelGenerator.Random.NextDouble() < _chanceToSpawnNewWalker;
 		}
 
 		public bool ShouldWalkerDestroy()
 		{
-			return Random.value < _chanceToDestroyWalker;
+			return LevelGenerator.Random.NextDouble() < _chanceToDestroyWalker;
 		}
 
 		public void CreateWalker(Vector2Int randomPositionInLevel)

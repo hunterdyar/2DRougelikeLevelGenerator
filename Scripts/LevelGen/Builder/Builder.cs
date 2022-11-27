@@ -67,5 +67,10 @@ namespace RougeLevelGen
 				_createdObjects.Add(GameObject.Instantiate(FloorPrefab, _generator.Settings.GridToWorld(gridPos)+offset, Quaternion.identity, parent));
 			}
 		}
+
+		public void DestroyAllImmediate()
+		{
+			ClearExistingPrefabs();
+		}
 	}
 }

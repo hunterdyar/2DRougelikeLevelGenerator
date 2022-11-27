@@ -10,7 +10,7 @@ namespace RougeLevelGen
 	{
 		protected string _layer;
 		public LevelGenSettings Settings => _levelGenerator.Settings;
-		public LevelGenerator LevelLevelGenerator => _levelGenerator;
+		public LevelGenerator LevelGenerator => _levelGenerator;
 		private LevelGenerator _levelGenerator;
 		public Dictionary<Vector2Int, Tile> Tiles => _levelGenerator.GetTiles(_layer);
 
@@ -40,5 +40,17 @@ namespace RougeLevelGen
 			_levelGenerator.SetTile(_layer, position, tile);
 		}
 
+		//Not sure where this belongs. Utility?
+		public static Tile RandomFloorOrWall(float percentageFloor)
+		{
+			if (LevelGenerator.Random.NextDouble() <= percentageFloor)
+			{
+				return Tile.Floor;
+			}
+			else
+			{
+				return Tile.Wall;
+			}
+		}
 	}
 }

@@ -51,6 +51,18 @@ namespace RougeLevelGen.Editor
 				Rect r3 = new Rect(position.x, y, position.width, EditorGUIUtility.singleLineHeight);
 				EditorGUI.PropertyField(r3, repeat, new GUIContent("Additional Times Smoothing"));
 				// y +=EditorGUIUtility.singleLineHeight;
+			}else if (v == GeneratorTypes.Noise)
+			{
+				var desired = property.FindPropertyRelative("desiredPercentageFloorFill");
+				Rect r = new Rect(position.x, y, position.width, EditorGUIUtility.singleLineHeight);
+				EditorGUI.PropertyField(r, desired, new GUIContent("Percentage Floor Fill"));
+				y += EditorGUIUtility.singleLineHeight;
+			}
+			else if (v == GeneratorTypes.SimpleCellularAutomata)
+			{
+				var repeat = property.FindPropertyRelative("repeat");
+				Rect r3 = new Rect(position.x, y, position.width, EditorGUIUtility.singleLineHeight);
+				EditorGUI.PropertyField(r3, repeat, new GUIContent("Repeat"));
 			}
 
 			// Draw label

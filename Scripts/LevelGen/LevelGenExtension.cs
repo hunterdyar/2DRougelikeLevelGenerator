@@ -20,7 +20,13 @@ namespace RougeLevelGen
 			float wallCount = tiles.Count(x => x.Value == Tile.Wall);
 			return wallCount / count;
 		}
-		
+
+		public static Dictionary<Vector2Int, Tile> Clone(this Dictionary<Vector2Int, Tile> tiles)
+		{
+			Dictionary<Vector2Int, Tile> clone = new Dictionary<Vector2Int, Tile>(tiles);
+			return clone;
+		}
+
 
 		public static Vector2Int Rotate(this Vector2Int v, RotationDirection direction)
 		{

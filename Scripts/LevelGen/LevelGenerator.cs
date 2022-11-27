@@ -2,30 +2,47 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor.Rendering.Universal;
 using UnityEngine;
 
 namespace RougeLevelGen
 {
     public class LevelGenerator : MonoBehaviour
     {
+        //statics
+        public static System.Random Random;
         public static bool DebugWatch = true;
+        public static float Progress;
+        public static string ProgressStage;
+        
+        //serialized
         public LevelGenSettings Settings => _settings;
         [SerializeField] private LevelGenSettings _settings;
         [SerializeField] private bool generateOnStart;
-        
         public GeneratorConfiguration[] _generationLayersSetup;
+        [SerializeField] private List<Builder> _builders;
+        
+        //private
         private Dictionary<string, Dictionary<Vector2Int, Tile>> _generationLayers = new Dictionary<string, Dictionary<Vector2Int, Tile>>();
         private List<Generator> _generators;
-
-        [SerializeField] private List<Builder> _builders;
+        private Coroutine _generationCoroutine;
         
         [ContextMenu("Generate")]
         public void Generate()
         {
-            StartCoroutine(DoGeneration());
+            Cancel();
+            _generationCoroutine = StartCoroutine(DoGeneration());
         }
-        
+
+        [ContextMenu("Cancel")]
+        public void Cancel()
+        {
+            if (_generationCoroutine != null)
+            {
+                StopCoroutine(_generationCoroutine);
+                Progress = 0;
+                ProgressStage = "Cancelled";
+            }
+        }
         private void Start()
         {
             if (generateOnStart)
@@ -35,7 +52,17 @@ namespace RougeLevelGen
         }
         private IEnumerator DoGeneration()
         {
-            
+            ProgressStage = "Initializing";
+            Progress = 0;
+            if(string.IsNullOrEmpty(Settings.seed))
+            {
+                //todo: write my own noise class :p
+                Random = new System.Random();
+            }else
+            {
+                Random = new System.Random(Settings.seed.GetHashCode());
+                
+            }
             //Setup
             InitiateEmptyTiles();
             
@@ -45,16 +72,24 @@ namespace RougeLevelGen
            //Generate
             foreach(Generator g in _generators)
             {
+                ProgressStage = g.ToString();
                 yield return StartCoroutine(g.Generate());
                 //todo: generation layers. A dictionary of dictionaries.
             }
-            
+
+            ProgressStage = "Building";
+
+            Progress = 0;
             //build layers
             foreach (var builder in _builders)
             {
                 builder.Initiate(this);
                 builder.Build();
             }
+
+            Progress = 1;
+            ProgressStage = "Complete";
+
         }
 
         private void InitiateGenerators()
@@ -157,6 +192,10 @@ namespace RougeLevelGen
         [ContextMenu("Clear Children")]
         private void ClearChildrenObjects()
         {
+            foreach (var builder in _builders)
+            {
+                builder.DestroyAllImmediate();
+            }
             foreach (Transform child in transform)
             {
                 DestroyImmediate(child.gameObject);

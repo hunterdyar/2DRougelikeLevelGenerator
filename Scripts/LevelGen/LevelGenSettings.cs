@@ -1,13 +1,12 @@
 ﻿using System;
-using Unity.VisualScripting.Dependencies.Sqlite;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 namespace RougeLevelGen
 {
 	[Serializable]
 	public struct LevelGenSettings
 	{
+		public string seed;
 		[Min(0)]
 		public int LevelWidth;
 		[Min(0)]
@@ -18,7 +17,7 @@ namespace RougeLevelGen
 		
 		public Vector2Int RandomPositionInLevel()
 		{
-			return new Vector2Int(Random.Range(0, LevelWidth), Random.Range(0, LevelHeight));
+			return new Vector2Int(LevelGenerator.Random.Next(0, LevelWidth), LevelGenerator.Random.Next(0, LevelHeight));
 		}
 
 		public bool IsInBounds(Vector2Int pos)
@@ -28,7 +27,7 @@ namespace RougeLevelGen
 
 		public RotationDirection RandomRotationDirection()
 		{
-			switch (Random.Range(0, 3))
+			switch (LevelGenerator.Random.Next(0, 3))
 			{
 				case 0: return RotationDirection.None;
 				case 1: return RotationDirection.Clockwise;
