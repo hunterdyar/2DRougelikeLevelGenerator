@@ -14,11 +14,8 @@ namespace RougeLevelGen
 		public int LevelHeight;
 		
 		public Vector3 globalSpawnOffset;
-		[Range(0,1)]
-		public float desiredPercentageFloors;
 
-		[Range(0, 1)] public float chanceToSpawnNewWalker;
-		[Range(0, 1)] public float chanceToDestroyWalker;		
+		
 		public Vector2Int RandomPositionInLevel()
 		{
 			return new Vector2Int(Random.Range(0, LevelWidth), Random.Range(0, LevelHeight));
@@ -44,16 +41,6 @@ namespace RougeLevelGen
 		public Vector3 GridToWorld(Vector2Int gridPos)
 		{
 			return new Vector3(gridPos.x, gridPos.y, 0)+globalSpawnOffset;
-		}
-
-		public bool ShouldWalkerSpawnWalker()
-		{
-			return Random.value < chanceToSpawnNewWalker;
-		}
-
-		public bool ShouldWalkerDestroy()
-		{
-			return Random.value < chanceToDestroyWalker;
 		}
 	}
 }

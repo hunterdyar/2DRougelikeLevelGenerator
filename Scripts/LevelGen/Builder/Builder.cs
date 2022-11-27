@@ -41,6 +41,12 @@ namespace RougeLevelGen
 		}
 		private void InstantiatePrefabs()
 		{
+			if (!_generator.HasLayer(layer))
+			{
+				Debug.LogError("Can't build for layer: "+layer+". Layer doesn't exist.");
+				return;
+			}
+
 			var tiles = _generator.GetTiles(layer);
 			foreach (var t in tiles)
 			{

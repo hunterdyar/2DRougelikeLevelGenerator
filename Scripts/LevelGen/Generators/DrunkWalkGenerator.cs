@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace RougeLevelGen
 {
@@ -12,9 +13,16 @@ namespace RougeLevelGen
 		private LevelGenerator _generator;
 		private int _maxWalkers;
 		private readonly List<Walker> _walkers = new List<Walker>();
-		public DrunkWalkGenerator(string layer, LevelGenerator levelGenerator, int maxWalkers) : base(layer, levelGenerator)
+
+		private float _chanceToSpawnNewWalker;
+		private float _chanceToDestroyWalker;
+		private float _desiredPercentageFloors;
+		public DrunkWalkGenerator(string layer, LevelGenerator levelGenerator, int maxWalkers, float chanceToSpawnNewWalker, float chanceToDestroyWalker, float desiredPercentageFloorFill) : base(layer, levelGenerator)
 		{
 			this._maxWalkers = maxWalkers;
+			this._chanceToSpawnNewWalker = chanceToSpawnNewWalker;
+			this._chanceToDestroyWalker = chanceToDestroyWalker;
+			this._desiredPercentageFloors = desiredPercentageFloorFill;
 		}
 		
 
@@ -28,7 +36,7 @@ namespace RougeLevelGen
 
 		public override IEnumerator Generate()
 		{
-			while (Tiles.GetPercentageFloor() < Settings.desiredPercentageFloors)
+			while (Tiles.GetPercentageFloor() < _desiredPercentageFloors)
 			{
 				for (var i = _walkers.Count - 1; i >= 0; i--)
 				{
@@ -37,6 +45,16 @@ namespace RougeLevelGen
 				}
 			}
 			yield break;
+		}
+
+		public bool ShouldWalkerSpawnWalker()
+		{
+			return Random.value < _chanceToSpawnNewWalker;
+		}
+
+		public bool ShouldWalkerDestroy()
+		{
+			return Random.value < _chanceToDestroyWalker;
 		}
 
 		public void CreateWalker(Vector2Int randomPositionInLevel)

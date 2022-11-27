@@ -26,10 +26,25 @@ namespace RougeLevelGen.Editor
 			var v = type.GetEnumValue<GeneratorTypes>();
 			if (v == GeneratorTypes.DrunkWalk)
 			{
+				var desired = property.FindPropertyRelative("desiredPercentageFloorFill");
+				Rect r = new Rect(position.x, y, position.width, EditorGUIUtility.singleLineHeight);
+				EditorGUI.PropertyField(r, desired, new GUIContent("Percentage Floor Fill"));
+				y += EditorGUIUtility.singleLineHeight;
+				
 				var maxWalks = property.FindPropertyRelative("maxWalkers");
-				Rect r3 = new Rect(position.x ,y,position.width, EditorGUIUtility.singleLineHeight);
-				EditorGUI.PropertyField(r3, maxWalks,new GUIContent("Maximum Walks"));
-				// y += EditorGUIUtility.singleLineHeight;
+				r = new Rect(position.x ,y,position.width, EditorGUIUtility.singleLineHeight);
+				EditorGUI.PropertyField(r, maxWalks,new GUIContent("Maximum Walkers"));
+				y += EditorGUIUtility.singleLineHeight;
+				
+				var chanceToSpawnNewWalker = property.FindPropertyRelative("chanceToSpawnNewWalker");
+				r = new Rect(position.x, y, position.width, EditorGUIUtility.singleLineHeight);
+				EditorGUI.PropertyField(r, chanceToSpawnNewWalker);
+				y += EditorGUIUtility.singleLineHeight;
+				
+				var chanceToDestroyWalker = property.FindPropertyRelative("chanceToDestroyWalker");
+				r = new Rect(position.x, y, position.width, EditorGUIUtility.singleLineHeight);
+				EditorGUI.PropertyField(r, chanceToDestroyWalker);
+				y += EditorGUIUtility.singleLineHeight;
 			}else if (v == GeneratorTypes.Smooth)
 			{
 				var repeat = property.FindPropertyRelative("repeat");
@@ -51,7 +66,10 @@ namespace RougeLevelGen.Editor
 			var v = type.GetEnumValue<GeneratorTypes>();
 			
 			int extraFields = 1;
-			
+			if (v == GeneratorTypes.DrunkWalk)
+			{
+				extraFields = 4;
+			}
 			
 			return EditorGUIUtility.singleLineHeight * (extraFields+2);
 			// return base.GetPropertyHeight(property, label);

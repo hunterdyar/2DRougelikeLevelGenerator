@@ -27,12 +27,12 @@ namespace RougeLevelGen
 			facingDir = facingDir.Rotate(_settings.RandomRotationDirection());
 			
 			//Maybe create walker
-			if (_settings.ShouldWalkerSpawnWalker())
+			if (_generator.ShouldWalkerSpawnWalker())
 			{
 				_generator.CreateWalker(position);
 			}
 
-			if (_settings.ShouldWalkerDestroy())
+			if (_generator.ShouldWalkerDestroy())
 			{
 				_generator.DestroyWalker(this);
 			}

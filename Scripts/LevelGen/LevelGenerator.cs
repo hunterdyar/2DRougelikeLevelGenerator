@@ -89,9 +89,6 @@ namespace RougeLevelGen
             return positions;
         }
         
-        [ContextMenu("Clear Existing")]
-       
-
         public string[] GetGenerationLayers()
         {
             //HashSets force uniqueness.
@@ -149,6 +146,21 @@ namespace RougeLevelGen
         public Dictionary<Vector2Int, Tile> GetTiles(string layer)
         {
             return _generationLayers[layer];
+        }
+
+        public bool HasLayer(string layer)
+        {
+            return GetGenerationLayers().Contains(layer);
+        }
+
+        //QoL convenience
+        [ContextMenu("Clear Children")]
+        private void ClearChildrenObjects()
+        {
+            foreach (Transform child in transform)
+            {
+                DestroyImmediate(child.gameObject);
+            }
         }
     }
 }
