@@ -12,11 +12,8 @@ namespace RougeLevelGen
 		public int LevelWidth;
 		[Min(0)]
 		public int LevelHeight;
-
-		[Min(1)] public int MaxWalkers;
-		[Min(0)] public int SmoothCount;
-		public Vector3 spawnOffset;
-		public Transform CreatedParent;
+		
+		public Vector3 globalSpawnOffset;
 		[Range(0,1)]
 		public float desiredPercentageFloors;
 
@@ -46,7 +43,7 @@ namespace RougeLevelGen
 
 		public Vector3 GridToWorld(Vector2Int gridPos)
 		{
-			return new Vector3(gridPos.x, gridPos.y, 0)+spawnOffset;
+			return new Vector3(gridPos.x, gridPos.y, 0)+globalSpawnOffset;
 		}
 
 		public bool ShouldWalkerSpawnWalker()

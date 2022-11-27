@@ -9,23 +9,23 @@ namespace RougeLevelGen
 {
     public class LevelGenerator : MonoBehaviour
     {
+        public static bool DebugWatch = true;
         public LevelGenSettings Settings => _settings;
         [SerializeField] private LevelGenSettings _settings;
         [SerializeField] private bool generateOnStart;
-        #if UNITY_EDITOR
-        [SerializeField] private bool debugWatch;
-        #endif
-        public GameObject WallPrefab;
-        private List<GameObject> _createdObjects = new List<GameObject>();
-        private List<Walker> _walkers = new List<Walker>();
-        private readonly Dictionary<Vector2Int, Tile> _tiles = new Dictionary<Vector2Int, Tile>();
+        
+        public GeneratorConfiguration[] _generationLayersSetup;
+        private Dictionary<string, Dictionary<Vector2Int, Tile>> _generationLayers = new Dictionary<string, Dictionary<Vector2Int, Tile>>();
+        private List<Generator> _generators;
+
+        [SerializeField] private List<Builder> _builders;
         
         [ContextMenu("Generate")]
         public void Generate()
         {
             StartCoroutine(DoGeneration());
         }
-
+        
         private void Start()
         {
             if (generateOnStart)
@@ -33,81 +33,49 @@ namespace RougeLevelGen
                 Generate();
             }
         }
-
         private IEnumerator DoGeneration()
         {
+            
             //Setup
-            ClearExistingPrefabs();
             InitiateEmptyTiles();
             
-            //create first walker
-            _walkers.Clear();
-            CreateWalker(_settings.RandomPositionInLevel());
+            //Inititate
+            InitiateGenerators();
             
-            while (_tiles.GetPercentageFloor() < _settings.desiredPercentageFloors)
+           //Generate
+            foreach(Generator g in _generators)
             {
-                for (var i = _walkers.Count - 1; i >= 0; i--)
-                {
-                    var walker = _walkers[i];
-                    walker.Step();
-                }
-
-#if UNITY_EDITOR
-                if (debugWatch)
-                {
-                    yield return null;
-                    ClearExistingPrefabs();
-                    InstantiatePrefabs();
-                }
-#endif
-            }
-
-            //Smooth
-            for (int i = 0; i < _settings.SmoothCount; i++)
-            {
-                Smooth();
-#if UNITY_EDITOR
-                if (debugWatch)
-                {
-                    yield return null;
-                    ClearExistingPrefabs();
-                    InstantiatePrefabs();
-                }
-#endif
+                yield return StartCoroutine(g.Generate());
+                //todo: generation layers. A dictionary of dictionaries.
             }
             
-            // yield return null;
-            InstantiatePrefabs();
-        }
-
-        private void Smooth()
-        {
-            //iterating through each cell/
-            //removing wall cells with 4 or more orthogonally or diagonally adjacent non-wall cells.
-            for (int i = 0; i < _settings.LevelWidth; i++)
+            //build layers
+            foreach (var builder in _builders)
             {
-                for (int j = 0; j < _settings.LevelHeight; j++)
-                {
-                    var pos = new Vector2Int(i, j);
-                    if (_tiles[pos] == Tile.Wall)
-                    {
-                        var c = CountFloorNeighbors(pos,true);
-                        if (c > 4)
-                        {
-                            _tiles[pos] = Tile.Floor;
-                        }
-                    }
-                }
+                builder.Initiate(this);
+                builder.Build();
             }
         }
 
-        private int CountFloorNeighbors(Vector2Int pos, bool includeDiagonal)
+        private void InitiateGenerators()
         {
-            var neighbors = GetNeighbors(pos, includeDiagonal);
-            return neighbors.Count(x => _tiles[x] == Tile.Floor);
+            _generators = new List<Generator>();
+
+            foreach (var gc in _generationLayersSetup)
+            {
+                var g = gc.GetGenerator(this);
+                _generators.Add(g);
+                g.Initiate();
+            }
         }
 
-        private List<Vector2Int> GetNeighbors(Vector2Int pos, bool includeDiagonal)
+        public int CountFloorNeighbors(string layer, Vector2Int pos, bool includeDiagonal)
+        {
+            var neighbors = GetNeighborPositions(pos, includeDiagonal);
+            return neighbors.Count(x => _generationLayers[layer][x] == Tile.Floor);
+        }
+
+        public List<Vector2Int> GetNeighborPositions(Vector2Int pos, bool includeDiagonal)
         {
             List<Vector2Int> positions = new List<Vector2Int>();
             var array = includeDiagonal ? Utility.EightDirections : Utility.CardinalDirections;
@@ -120,74 +88,44 @@ namespace RougeLevelGen
             }
             return positions;
         }
-
-        public void CreateWalker(Vector2Int randomPositionInLevel)
-        {
-            if (_walkers.Count < _settings.MaxWalkers)
-            {
-                Walker w = new Walker(randomPositionInLevel, this);
-                _walkers.Add(w);
-            }
-        }
-
-        public void DestroyWalker(Walker walker)
-        {
-            if (_walkers.Count > 1)
-            {
-                _walkers.Remove(walker);
-            }
-        }
-
-        private void InstantiatePrefabs()
-        {
-            foreach (var t in _tiles)
-            {
-                if (t.Value == Tile.Wall)
-                {
-                    InstantiatePrefab(t.Key, t.Value);
-                }
-            }
-        }
-
-        private void InstantiatePrefab(Vector2Int gridPos, Tile tile)
-        {
-            if (tile == Tile.Wall)
-            {
-                _createdObjects.Add(Instantiate(WallPrefab, _settings.GridToWorld(gridPos), Quaternion.identity,_settings.CreatedParent));
-            }
-        }
-
+        
         [ContextMenu("Clear Existing")]
-        private void ClearExistingPrefabs()
+       
+
+        public string[] GetGenerationLayers()
         {
-            foreach (var go in _createdObjects)
+            //todo: replce list with array, this is known length.
+            List<string> layers = new List<string>();
+            foreach (var gc in _generationLayersSetup)
             {
-                //if in editor mode...
-                DestroyImmediate(go);
+                layers.Add(gc.layer);
             }
 
-            _createdObjects = new List<GameObject>();
+            return layers.ToArray();
         }
-
         void InitiateEmptyTiles()
         {
-            _tiles.Clear();
-            //Create a grid of walls.
-            for (int i = 0; i < _settings.LevelWidth; i++)
+            foreach (var key in GetGenerationLayers())
             {
-                for (int j = 0; j < _settings.LevelHeight; j++)
+                _generationLayers[key] = new Dictionary<Vector2Int, Tile>();
+                
+                //Create a grid of walls.
+                for (int i = 0; i < _settings.LevelWidth; i++)
                 {
-                    var pos = new Vector2Int(i, j);
-                    _tiles[pos] = Tile.Wall;
+                    for (int j = 0; j < _settings.LevelHeight; j++)
+                    {
+                        var pos = new Vector2Int(i, j);
+                        _generationLayers[key][pos] = Tile.Wall;
+                    }
                 }
             }
         }
 
-        public void SetTile(Vector2Int position, Tile floor)
+        public void SetTile(string layer, Vector2Int position, Tile floor)
         {
-            if (_tiles.ContainsKey(position))
+            if (_generationLayers[layer].ContainsKey(position))
             {
-                _tiles[position] = floor;
+                _generationLayers[layer][position] = floor;
             }
             else
             {
@@ -195,6 +133,22 @@ namespace RougeLevelGen
             }
         }
 
-        
+        public Tile GetTile(string layer, Vector2Int pos)
+        {
+            if (_generationLayers[layer].TryGetValue(pos, out var tile))
+            {
+                return tile;
+            }
+            else
+            {
+                //OOPS
+                return Tile.Wall;
+            }
+        }
+
+        public Dictionary<Vector2Int, Tile> GetTiles(string layer)
+        {
+            return _generationLayers[layer];
+        }
     }
 }
