@@ -94,8 +94,8 @@ namespace RougeLevelGen
 
         public string[] GetGenerationLayers()
         {
-            //todo: replce list with array, this is known length.
-            List<string> layers = new List<string>();
+            //HashSets force uniqueness.
+            HashSet<string> layers = new HashSet<string>();
             foreach (var gc in _generationLayersSetup)
             {
                 layers.Add(gc.layer);
