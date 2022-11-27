@@ -13,18 +13,18 @@ namespace RougeLevelGen
 		public int maxWalkers;
 		public int repeat;
 
-		public Generator GetGenerator(LevelGenerator generator)
+		public Generator GetGenerator(LevelGenerator levelGenerator)
 		{
 			//There are so many clever-er ways do write this. That's a future problem.
 			if (type == GeneratorTypes.DrunkWalk)
 			{
-				return new DrunkWalkGenerator(layer, generator, maxWalkers);
+				return new DrunkWalkGenerator(layer, levelGenerator, maxWalkers);
 			}else if (type == GeneratorTypes.Smooth)
 			{
-				return new SmoothGenerator(layer,generator, repeat);
+				return new SmoothGenerator(layer,levelGenerator, repeat);
 			}
 
-			return new DrunkWalkGenerator(layer, generator, maxWalkers);
+			return new DrunkWalkGenerator(layer, levelGenerator, maxWalkers);
 		}
 	}
 }

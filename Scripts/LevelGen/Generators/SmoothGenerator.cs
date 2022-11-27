@@ -7,7 +7,7 @@ namespace RougeLevelGen
 	public class SmoothGenerator : Generator
 	{
 		private int timesToSmooth;
-		public SmoothGenerator(string layer, LevelGenerator generator, int repeat) : base(layer, generator)
+		public SmoothGenerator(string layer, LevelGenerator levelGenerator, int repeat) : base(layer, levelGenerator)
 		{
 			timesToSmooth = repeat + 1;
 			if (timesToSmooth < 0)
@@ -39,7 +39,7 @@ namespace RougeLevelGen
 					var pos = new Vector2Int(i, j);
 					if (GetTile(pos) == Tile.Wall)
 					{
-						var c = Gen.CountFloorNeighbors(_layer, pos, true);
+						var c = LevelLevelGenerator.CountFloorNeighbors(_layer, pos, true);
 						if (c > 4)
 						{
 							SetTile(pos, Tile.Floor);

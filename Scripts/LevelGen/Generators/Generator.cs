@@ -9,15 +9,15 @@ namespace RougeLevelGen
 	public class Generator
 	{
 		protected string _layer;
-		public LevelGenSettings Settings => _generator.Settings;
-		public LevelGenerator Gen => _generator;
-		private LevelGenerator _generator;
-		public Dictionary<Vector2Int, Tile> Tiles => _generator.GetTiles(_layer);
+		public LevelGenSettings Settings => _levelGenerator.Settings;
+		public LevelGenerator LevelLevelGenerator => _levelGenerator;
+		private LevelGenerator _levelGenerator;
+		public Dictionary<Vector2Int, Tile> Tiles => _levelGenerator.GetTiles(_layer);
 
-		public Generator(string layer, LevelGenerator generator)
+		public Generator(string layer, LevelGenerator levelGenerator)
 		{
 			_layer = layer;
-			_generator = generator;
+			_levelGenerator = levelGenerator;
 		}
 		public virtual void Initiate()
 		{
@@ -32,12 +32,12 @@ namespace RougeLevelGen
 		//Wrappers for layer-agnostic interaction
 		public Tile GetTile(Vector2Int pos)
 		{
-			return _generator.GetTile(_layer, pos);
+			return _levelGenerator.GetTile(_layer, pos);
 		}
 
 		public void SetTile(Vector2Int position, Tile tile)
 		{
-			_generator.SetTile(_layer, position, tile);
+			_levelGenerator.SetTile(_layer, position, tile);
 		}
 
 	}

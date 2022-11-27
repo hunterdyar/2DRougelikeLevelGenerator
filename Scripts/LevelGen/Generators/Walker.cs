@@ -55,7 +55,7 @@ namespace RougeLevelGen
 				{
 					if (_history.Count > 0)
 					{
-						var walkOptions = _generator.Gen.GetNeighborPositions(_history.Peek(), false).Where(x => _generator.GetTile(x) == Tile.Wall).ToList();
+						var walkOptions = _generator.LevelLevelGenerator.GetNeighborPositions(_history.Peek(), false).Where(x => _generator.GetTile(x) == Tile.Wall).ToList();
 						if (walkOptions.Count > 0)
 						{
 							position = walkOptions[Random.Range(0, walkOptions.Count)];

@@ -12,7 +12,7 @@ namespace RougeLevelGen
 		private LevelGenerator _generator;
 		private int _maxWalkers;
 		private readonly List<Walker> _walkers = new List<Walker>();
-		public DrunkWalkGenerator(string layer, LevelGenerator generator, int maxWalkers) : base(layer, generator)
+		public DrunkWalkGenerator(string layer, LevelGenerator levelGenerator, int maxWalkers) : base(layer, levelGenerator)
 		{
 			this._maxWalkers = maxWalkers;
 		}
