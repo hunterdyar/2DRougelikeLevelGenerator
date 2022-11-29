@@ -44,19 +44,16 @@ namespace RougeLevelGen.Editor
 				var chanceToDestroyWalker = property.FindPropertyRelative("chanceToDestroyWalker");
 				r = new Rect(position.x, y, position.width, EditorGUIUtility.singleLineHeight);
 				EditorGUI.PropertyField(r, chanceToDestroyWalker);
-				y += EditorGUIUtility.singleLineHeight;
 			}else if (v == GeneratorTypes.Smooth)
 			{
 				var repeat = property.FindPropertyRelative("repeat");
 				Rect r3 = new Rect(position.x, y, position.width, EditorGUIUtility.singleLineHeight);
 				EditorGUI.PropertyField(r3, repeat, new GUIContent("Additional Times Smoothing"));
-				// y +=EditorGUIUtility.singleLineHeight;
 			}else if (v == GeneratorTypes.Noise)
 			{
 				var desired = property.FindPropertyRelative("desiredPercentageFloorFill");
 				Rect r = new Rect(position.x, y, position.width, EditorGUIUtility.singleLineHeight);
 				EditorGUI.PropertyField(r, desired, new GUIContent("Percentage Floor Fill"));
-				y += EditorGUIUtility.singleLineHeight;
 			}
 			else if (v == GeneratorTypes.SimpleCellularAutomata)
 			{
@@ -74,7 +71,11 @@ namespace RougeLevelGen.Editor
 				var scale = property.FindPropertyRelative("scale");
 				r = new Rect(position.x, y, position.width, EditorGUIUtility.singleLineHeight);
 				EditorGUI.PropertyField(r, scale, new GUIContent("Noise Scale"));
-				y += EditorGUIUtility.singleLineHeight;
+			}else if (v == GeneratorTypes.LevelEdges)
+			{
+				var thick = property.FindPropertyRelative("thickness");
+				Rect r = new Rect(position.x, y, position.width, EditorGUIUtility.singleLineHeight);
+				EditorGUI.PropertyField(r, thick, new GUIContent("Thickness"));
 			}
 
 			// Draw label

@@ -9,19 +9,19 @@ namespace RougeLevelGen
 		{
 		}
 
-		//Todo: 
 		public override IEnumerator Generate()
 		{
 			var keys = LevelGenerator.GetTiles(_layer).Keys.ToArray();
 			foreach (var pos in keys)
 			{
+				//While I don't know actively plan to, I anticipate possibly having more tile types, perhaps to help mark edges. so elseif instead of else. This could be a one-line ternary, but whatever
 				if (GetTile(pos) == Tile.Floor)
 				{
 					SetTile(pos,Tile.Wall);
 				}else if (GetTile(pos) == Tile.Wall)
 				{
 					SetTile(pos, Tile.Floor);
-				}//While I don't know why, I anticipate adding more tile types, so elseif instead of else.
+				}
 			}
 			return base.Generate();
 		}

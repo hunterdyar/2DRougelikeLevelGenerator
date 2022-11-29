@@ -17,6 +17,7 @@ namespace RougeLevelGen
 		[Range(0, 1)] public float chanceToDestroyWalker = 0.01f;
 		[Range(0, 1)] public float desiredPercentageFloorFill = 0.51f;
 		public float scale = 1;
+		public int thickness = 1;
 		public int repeat = 0;
 
 		public Generator GetGenerator(LevelGenerator levelGenerator)
@@ -41,6 +42,9 @@ namespace RougeLevelGen
 			}else if (type == GeneratorTypes.Perlin)
 			{
 				return new PerlinNoiseThreshold(layer, levelGenerator, desiredPercentageFloorFill, scale);
+			}else if (type == GeneratorTypes.LevelEdges)
+			{
+				return new LevelEdgesGenerator(layer, levelGenerator, thickness);
 			}
 
 			return new DrunkWalkGenerator(layer, levelGenerator, maxWalkers, chanceToSpawnNewWalker, chanceToDestroyWalker, desiredPercentageFloorFill);

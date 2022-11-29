@@ -18,7 +18,6 @@ namespace RougeLevelGen
 			_scale = scale;
 		}
 
-		//Todo: Take perlin noise and keep those above a certain threshold walls, the rest floors.
 		public override IEnumerator Generate()
 		{
 			seed = new Vector2((float)LevelGenerator.Random.NextDouble()*LevelGenerator.Settings.LevelWidth*100*_scale, (float)LevelGenerator.Random.NextDouble() * LevelGenerator.Settings.LevelWidth*100*_scale);

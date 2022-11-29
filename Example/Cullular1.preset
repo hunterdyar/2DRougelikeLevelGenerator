@@ -1,0 +1,199 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!181963792 &2655988077585873504
+Preset:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Cullular1
+  m_TargetType:
+    m_NativeTypeID: 114
+    m_ManagedTypePPtr: {fileID: 11500000, guid: cf48c126446e18e41acb9ac86fb2049c, type: 3}
+    m_ManagedTypeFallback: 
+  m_Properties:
+  - target: {fileID: 0}
+    propertyPath: m_Enabled
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_EditorHideFlags
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_EditorClassIdentifier
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _settings.seed
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _settings.LevelWidth
+    value: 20
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _settings.LevelHeight
+    value: 20
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _settings.globalSpawnOffset.x
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _settings.globalSpawnOffset.y
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _settings.globalSpawnOffset.z
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: generateOnStart
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _generationLayersSetup.Array.size
+    value: 3
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _generationLayersSetup.Array.data[0].layer
+    value: base
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _generationLayersSetup.Array.data[0].type
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _generationLayersSetup.Array.data[0].maxWalkers
+    value: 5
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _generationLayersSetup.Array.data[0].chanceToSpawnNewWalker
+    value: 0.135
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _generationLayersSetup.Array.data[0].chanceToDestroyWalker
+    value: 0.164
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _generationLayersSetup.Array.data[0].desiredPercentageFloorFill
+    value: 0.545
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _generationLayersSetup.Array.data[0].scale
+    value: 0.1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _generationLayersSetup.Array.data[0].thickness
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _generationLayersSetup.Array.data[0].repeat
+    value: 4
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _generationLayersSetup.Array.data[1].layer
+    value: base
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _generationLayersSetup.Array.data[1].type
+    value: 6
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _generationLayersSetup.Array.data[1].maxWalkers
+    value: 5
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _generationLayersSetup.Array.data[1].chanceToSpawnNewWalker
+    value: 0.135
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _generationLayersSetup.Array.data[1].chanceToDestroyWalker
+    value: 0.164
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _generationLayersSetup.Array.data[1].desiredPercentageFloorFill
+    value: 0.091
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _generationLayersSetup.Array.data[1].scale
+    value: 0.1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _generationLayersSetup.Array.data[1].thickness
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _generationLayersSetup.Array.data[1].repeat
+    value: 4
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _generationLayersSetup.Array.data[2].layer
+    value: base
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _generationLayersSetup.Array.data[2].type
+    value: 3
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _generationLayersSetup.Array.data[2].maxWalkers
+    value: 5
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _generationLayersSetup.Array.data[2].chanceToSpawnNewWalker
+    value: 0.135
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _generationLayersSetup.Array.data[2].chanceToDestroyWalker
+    value: 0.164
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _generationLayersSetup.Array.data[2].desiredPercentageFloorFill
+    value: 0.091
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _generationLayersSetup.Array.data[2].scale
+    value: 0.1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _generationLayersSetup.Array.data[2].thickness
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _generationLayersSetup.Array.data[2].repeat
+    value: 4
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _builders.Array.size
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _builders.Array.data[0].layer
+    value: base
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _builders.Array.data[0].parent
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _builders.Array.data[0].offset.x
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _builders.Array.data[0].offset.y
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _builders.Array.data[0].offset.z
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _builders.Array.data[0].WallPrefab
+    value: 
+    objectReference: {fileID: 2967708919665847277, guid: 2ad73532677acd54f952b68f6d4849b5, type: 3}
+  - target: {fileID: 0}
+    propertyPath: _builders.Array.data[0].FloorPrefab
+    value: 
+    objectReference: {fileID: 0}
+  m_ExcludedProperties: []

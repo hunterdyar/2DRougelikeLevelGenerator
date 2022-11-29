@@ -11,6 +11,8 @@ namespace RougeLevelGen
 		SimpleCellularAutomata,
 		Invert,
 		[InspectorName("Perlin Noise Threshold")]
-		Perlin
+		Perlin,
+		[InspectorName("Level Edge Fill")]
+		LevelEdges
 	}
 }
