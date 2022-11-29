@@ -64,6 +64,18 @@ namespace RougeLevelGen.Editor
 				Rect r3 = new Rect(position.x, y, position.width, EditorGUIUtility.singleLineHeight);
 				EditorGUI.PropertyField(r3, repeat, new GUIContent("Repeat"));
 			}
+			else if (v == GeneratorTypes.Perlin)
+			{
+				var desired = property.FindPropertyRelative("desiredPercentageFloorFill");
+				Rect r = new Rect(position.x, y, position.width, EditorGUIUtility.singleLineHeight);
+				EditorGUI.PropertyField(r, desired, new GUIContent("Floor to Wall Ratio"));
+				y += EditorGUIUtility.singleLineHeight;
+				
+				var scale = property.FindPropertyRelative("scale");
+				r = new Rect(position.x, y, position.width, EditorGUIUtility.singleLineHeight);
+				EditorGUI.PropertyField(r, scale, new GUIContent("Noise Scale"));
+				y += EditorGUIUtility.singleLineHeight;
+			}
 
 			// Draw label
 			//position = new Rect(position.x, position.y + EditorGUIUtility.singleLineHeight, position.width, EditorGUIUtility.singleLineHeight);
@@ -81,6 +93,12 @@ namespace RougeLevelGen.Editor
 			if (v == GeneratorTypes.DrunkWalk)
 			{
 				extraFields = 4;
+			}else if (v == GeneratorTypes.Invert)
+			{
+				extraFields = 0;
+			}else if (v == GeneratorTypes.Perlin)
+			{
+				extraFields = 2;
 			}
 			
 			return EditorGUIUtility.singleLineHeight * (extraFields+2);

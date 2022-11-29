@@ -1,10 +1,16 @@
-﻿namespace RougeLevelGen
+﻿using UnityEngine;
+
+namespace RougeLevelGen
 {
 	public enum GeneratorTypes
 	{
 		DrunkWalk,
 		Smooth,
 		Noise,
-		SimpleCellularAutomata
+		[InspectorName("Cellular Automata")]
+		SimpleCellularAutomata,
+		Invert,
+		[InspectorName("Perlin Noise Threshold")]
+		Perlin
 	}
 }

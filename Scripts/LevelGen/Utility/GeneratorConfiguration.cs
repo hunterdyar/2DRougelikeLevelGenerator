@@ -16,6 +16,7 @@ namespace RougeLevelGen
 		[Range(0, 1)] public float chanceToSpawnNewWalker = 0.01f;
 		[Range(0, 1)] public float chanceToDestroyWalker = 0.01f;
 		[Range(0, 1)] public float desiredPercentageFloorFill = 0.51f;
+		public float scale = 1;
 		public int repeat = 0;
 
 		public Generator GetGenerator(LevelGenerator levelGenerator)
@@ -33,6 +34,13 @@ namespace RougeLevelGen
 			}else if (type == GeneratorTypes.SimpleCellularAutomata)
 			{
 				return new SimpleCellularAutomata(layer, levelGenerator, repeat);
+			}
+			else if (type == GeneratorTypes.Invert)
+			{
+				return new InvertGenerator(layer, levelGenerator);
+			}else if (type == GeneratorTypes.Perlin)
+			{
+				return new PerlinNoiseThreshold(layer, levelGenerator, desiredPercentageFloorFill, scale);
 			}
 
 			return new DrunkWalkGenerator(layer, levelGenerator, maxWalkers, chanceToSpawnNewWalker, chanceToDestroyWalker, desiredPercentageFloorFill);
