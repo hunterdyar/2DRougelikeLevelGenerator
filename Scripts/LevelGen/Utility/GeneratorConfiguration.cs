@@ -53,6 +53,9 @@ namespace RougeLevelGen
 			}else if (type == GeneratorTypes.Fill)
 			{
 				return new FillGenerator(layer, levelGenerator, tile);
+			}else if (type == GeneratorTypes.FillIslands)
+			{
+				return new IslandProcessGenerator(layer, levelGenerator, tile);
 			}
 
 			return new DrunkWalkGenerator(layer, levelGenerator, maxWalkers, chanceToSpawnNewWalker, chanceToDestroyWalker, desiredPercentageFloorFill);

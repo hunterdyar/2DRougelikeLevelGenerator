@@ -16,14 +16,10 @@ namespace RougeLevelGen
 		public override IEnumerator Generate()
 		{
 			var posArray = LevelGenerator.GetTiles(_layer).Keys.ToArray();
-			int p = 0;
-			int c = posArray.Length;
 			LevelGenerator.ProgressStage = "Creating Noise";
 			foreach (var pos in posArray)
 			{
 				SetTile(pos,RandomFloorOrWall(_desiredPercentageFloors));
-				p++;
-				LevelGenerator.Progress = p / (float)c;
 			}
 
 			LevelGenerator.ProgressStage = "Done with Noise";

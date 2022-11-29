@@ -11,7 +11,6 @@ namespace RougeLevelGen
         //statics
         public static System.Random Random;
         public static bool DebugWatch = true;
-        public static float Progress;
         public static string ProgressStage;
         
         //serialized
@@ -39,7 +38,6 @@ namespace RougeLevelGen
             if (_generationCoroutine != null)
             {
                 StopCoroutine(_generationCoroutine);
-                Progress = 0;
                 ProgressStage = "Cancelled";
             }
         }
@@ -53,7 +51,6 @@ namespace RougeLevelGen
         private IEnumerator DoGeneration()
         {
             ProgressStage = "Initializing";
-            Progress = 0;
             if(string.IsNullOrEmpty(Settings.seed))
             {
                 //todo: write my own noise class :p
@@ -79,7 +76,6 @@ namespace RougeLevelGen
 
             ProgressStage = "Building";
 
-            Progress = 0;
             //build layers
             foreach (var builder in _builders)
             {
@@ -87,7 +83,6 @@ namespace RougeLevelGen
                 builder.Build();
             }
 
-            Progress = 1;
             ProgressStage = "Complete";
 
         }

@@ -29,3 +29,19 @@ See project goals. Before/After that:
 - Write some custom editor scripts for the config part
 - Settings and the generators all in a ScriptableObject for easy saving/loading using presets.
 - Use a factory pattern for generators
+
+
+# Example Usages
+
+## Cellular Automata + Island Culling
+Start with Noise, then a Level Edges, then cellular automata.
+
+![Cellular Automata + Settings](Documentation/cull1.png)
+
+Then, use the "Fill Islands" to fill all but the largest continous section of each type.
+
+![With fill islands for floors](Documentation/cull2.png)
+
+You may want to remove islands for both floors and walls.
+
+![With fill islands for walls](Documentation/cull3.png)

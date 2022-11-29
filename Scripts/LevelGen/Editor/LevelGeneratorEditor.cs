@@ -41,7 +41,7 @@ public class LevelGeneratorEditor : Editor
 			lg.Cancel();
 		}
 		
-		ProgressBar(LevelGenerator.Progress,LevelGenerator.ProgressStage);
+		EditorGUILayout.LabelField(LevelGenerator.ProgressStage);
 
 		serializedObject.ApplyModifiedProperties();
 	}

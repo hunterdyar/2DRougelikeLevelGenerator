@@ -36,8 +36,6 @@ namespace RougeLevelGen
 		{
 			var t = new Dictionary<Vector2Int,Tile>();//
 			var posArray = LevelGenerator.GetTiles(_layer).Keys.ToArray();
-			LevelGenerator.Progress = 0;
-			float delta = 1f / posArray.Length;
 			foreach (var pos in posArray)
 			{
 				int n = LevelGenerator.CountFloorNeighbors(_layer, pos, true);
@@ -61,7 +59,6 @@ namespace RougeLevelGen
 					//if it was not a wall and 5 or more neighbors were.
 				}
 
-				LevelGenerator.Progress += delta;
 			}
 
 			//Set tiles to our new copy array.

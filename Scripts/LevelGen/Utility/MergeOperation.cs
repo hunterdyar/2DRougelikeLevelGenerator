@@ -8,7 +8,7 @@ namespace RougeLevelGen
 		UnionFloors,
 		[InspectorName("Union Walls-Intersect Floors (Wall or Wall)")]
 		UnionWalls,
-		[InspectorName("Difference (Layer Floor only were other also floor)")]
+		[InspectorName("Difference (Layer Floor where other floor)")]
 		Difference,
 	}
 }

@@ -4,23 +4,25 @@ namespace RougeLevelGen
 {
 	public enum GeneratorTypes
 	{
-		[InspectorName("Generator/Drunk Walk (Additive)")]
+		[InspectorName("Generators/Drunk Walk (Additive)")]
 		DrunkWalk,
 		[InspectorName("Modifiers/Noise")]
 		Smooth,
-		[InspectorName("Generator/Noise")]
+		[InspectorName("Generators/Noise")]
 		Noise,
-		[InspectorName("Generator/Cellular Automata")]
+		[InspectorName("Generators/Cellular Automata")]
 		SimpleCellularAutomata,
 		[InspectorName("Modifiers/Invert")]
 		Invert,
-		[InspectorName("Generator/Perlin Noise Threshold")]
+		[InspectorName("Generators/Perlin Noise Threshold")]
 		Perlin,
-		[InspectorName("Generator/Level Edge Fill (Additive)")]
+		[InspectorName("Generators/Level Edge Fill (Additive)")]
 		LevelEdges,
 		[InspectorName("Merge Layers")]
 		Merge,
-		[InspectorName("Generator/Solid Fill")]
-		Fill
+		[InspectorName("Generators/Solid Fill")]
+		Fill,
+		[InspectorName("Modifiers/Fill Islands")]
+		FillIslands
 	}
 }

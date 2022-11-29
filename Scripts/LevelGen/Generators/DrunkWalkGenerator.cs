@@ -42,17 +42,13 @@ namespace RougeLevelGen
 
 		public override IEnumerator Generate()
 		{
-			float p = Tiles.GetPercentageFloor();
-			while (p < _desiredPercentageFloors)
+			while (Tiles.GetPercentageFloor() < _desiredPercentageFloors)
 			{
 				for (var i = _walkers.Count - 1; i >= 0; i--)
 				{
 					var walker = _walkers[i];
 					walker.Step();
 				}
-
-				p = Tiles.GetPercentageFloor();
-				LevelGenerator.Progress = p / _desiredPercentageFloors;
 			}
 			yield break;
 		}

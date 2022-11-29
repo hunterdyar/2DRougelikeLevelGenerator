@@ -23,15 +23,11 @@ namespace RougeLevelGen
 			seed = new Vector2((float)LevelGenerator.Random.NextDouble()*LevelGenerator.Settings.LevelWidth*100*_scale, (float)LevelGenerator.Random.NextDouble() * LevelGenerator.Settings.LevelWidth*100*_scale);
 			
 			var posArray = LevelGenerator.GetTiles(_layer).Keys.ToArray();
-			int p = 0;
-			int c = posArray.Length;
 			LevelGenerator.ProgressStage = "Creating Noise";
 			foreach (var pos in posArray)
 			{
 				Tile t = (Mathf.PerlinNoise(seed.x+(pos.x*_scale),+(seed.y)+pos.y*_scale) < _threshold )? Tile.Floor : Tile.Wall;
 				SetTile(pos, t);
-				p++;
-				LevelGenerator.Progress = p / (float)c;
 			}
 
 			

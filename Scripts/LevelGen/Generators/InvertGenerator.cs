@@ -11,6 +11,7 @@ namespace RougeLevelGen
 
 		public override IEnumerator Generate()
 		{
+			LevelGenerator.ProgressStage = "Invert";
 			var keys = LevelGenerator.GetTiles(_layer).Keys.ToArray();
 			foreach (var pos in keys)
 			{

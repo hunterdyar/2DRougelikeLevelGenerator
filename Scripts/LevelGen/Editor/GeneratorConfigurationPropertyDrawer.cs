@@ -91,6 +91,11 @@ namespace RougeLevelGen.Editor
 				var tile = property.FindPropertyRelative("tile");
 				Rect r = new Rect(position.x, y, position.width, EditorGUIUtility.singleLineHeight);
 				EditorGUI.PropertyField(r, tile, new GUIContent("Fill With"));
+			}else if (v == GeneratorTypes.FillIslands)
+			{
+				var tile = property.FindPropertyRelative("tile");
+				Rect r = new Rect(position.x, y, position.width, EditorGUIUtility.singleLineHeight);
+				EditorGUI.PropertyField(r, tile, new GUIContent("Remove all but largest Islands of"));
 			}
 
 			// Draw label
