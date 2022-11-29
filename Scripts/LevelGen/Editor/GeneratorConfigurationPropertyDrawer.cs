@@ -76,6 +76,21 @@ namespace RougeLevelGen.Editor
 				var thick = property.FindPropertyRelative("thickness");
 				Rect r = new Rect(position.x, y, position.width, EditorGUIUtility.singleLineHeight);
 				EditorGUI.PropertyField(r, thick, new GUIContent("Thickness"));
+			}else if (v == GeneratorTypes.Merge)
+			{
+				var otherLayer = property.FindPropertyRelative("otherLayer");
+				Rect r = new Rect(position.x, y, position.width, EditorGUIUtility.singleLineHeight);
+				EditorGUI.PropertyField(r, otherLayer, new GUIContent("Other Layer"));
+				y += EditorGUIUtility.singleLineHeight;
+
+				var merge = property.FindPropertyRelative("mergeOperation");
+				r = new Rect(position.x, y, position.width, EditorGUIUtility.singleLineHeight);
+				EditorGUI.PropertyField(r, merge, new GUIContent("Operation"));
+			}else if (v == GeneratorTypes.Fill)
+			{
+				var tile = property.FindPropertyRelative("tile");
+				Rect r = new Rect(position.x, y, position.width, EditorGUIUtility.singleLineHeight);
+				EditorGUI.PropertyField(r, tile, new GUIContent("Fill With"));
 			}
 
 			// Draw label
@@ -97,7 +112,7 @@ namespace RougeLevelGen.Editor
 			}else if (v == GeneratorTypes.Invert)
 			{
 				extraFields = 0;
-			}else if (v == GeneratorTypes.Perlin)
+			}else if (v == GeneratorTypes.Perlin || v == GeneratorTypes.Merge)
 			{
 				extraFields = 2;
 			}

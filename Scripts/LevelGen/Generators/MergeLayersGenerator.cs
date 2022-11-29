@@ -8,12 +8,12 @@ namespace RougeLevelGen
 	{
 		//The original layer will be modified by this layer.
 		private string _otherLayer;
+		private MergeOperation _mergeOperation;
 
-
-		public MergeLayersGenerator(string layer, LevelGenerator levelGenerator, string other) : base(layer, levelGenerator)
+		public MergeLayersGenerator(string layer, LevelGenerator levelGenerator, string other, MergeOperation mergeOperation) : base(layer, levelGenerator)
 		{
 			_otherLayer = other;
-
+			_mergeOperation = mergeOperation;
 		}
 
 		//todo: validate
@@ -33,18 +33,23 @@ namespace RougeLevelGen
 					var pos = new Vector2Int(i, j);
 					var a = GetTile(pos);
 					var b = LevelGenerator.GetTile(_otherLayer, pos);
-					
+					SetTile(pos,MergeTile(a,b,_mergeOperation));
 				}
 			}
 
 		}
 
-		Tile MergeTile(Tile a, Tile b, MergeOperation merge)
+		static Tile MergeTile(Tile a, Tile b, MergeOperation merge)
 		{
-			// switch (merge)
-			// {
-			// 	
-			// }
+			switch (merge)
+			{
+				case MergeOperation.UnionFloors:
+					return (a == Tile.Floor || b == Tile.Floor) ? Tile.Floor : Tile.Wall;
+				case MergeOperation.UnionWalls:
+					return (a == Tile.Wall || b == Tile.Wall) ? Tile.Wall : Tile.Floor;
+				case MergeOperation.Difference:
+					return (b == Tile.Floor) ? a : Tile.Wall;
+			}
 
 			return a;
 		}

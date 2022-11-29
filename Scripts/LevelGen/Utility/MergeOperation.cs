@@ -4,11 +4,11 @@ namespace RougeLevelGen
 {
 	public enum MergeOperation
 	{
-		[InspectorName("Merge (Floor or Floor)")]
-		Intersect,
-		
-		[InspectorName("Difference (Only both floor)")]
+		[InspectorName("Union Floors-Intersect Walls (Floor or Floor)")]
+		UnionFloors,
+		[InspectorName("Union Walls-Intersect Floors (Wall or Wall)")]
+		UnionWalls,
+		[InspectorName("Difference (Layer Floor only were other also floor)")]
 		Difference,
-		Union,//a and b
 	}
 }

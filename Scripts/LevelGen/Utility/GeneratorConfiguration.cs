@@ -19,7 +19,9 @@ namespace RougeLevelGen
 		public float scale = 1;
 		public int thickness = 1;
 		public int repeat = 0;
-
+		public string otherLayer;
+		public MergeOperation mergeOperation;
+		public Tile tile = Tile.Floor;
 		public Generator GetGenerator(LevelGenerator levelGenerator)
 		{
 			//There are so many clever-er ways do write this. That's a future problem.
@@ -45,6 +47,12 @@ namespace RougeLevelGen
 			}else if (type == GeneratorTypes.LevelEdges)
 			{
 				return new LevelEdgesGenerator(layer, levelGenerator, thickness);
+			}else if (type == GeneratorTypes.Merge)
+			{
+				return new MergeLayersGenerator(layer, levelGenerator, otherLayer, mergeOperation);
+			}else if (type == GeneratorTypes.Fill)
+			{
+				return new FillGenerator(layer, levelGenerator, tile);
 			}
 
 			return new DrunkWalkGenerator(layer, levelGenerator, maxWalkers, chanceToSpawnNewWalker, chanceToDestroyWalker, desiredPercentageFloorFill);
