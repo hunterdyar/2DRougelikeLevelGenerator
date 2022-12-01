@@ -50,10 +50,7 @@ namespace RougeLevelGen
 			var tiles = _generator.GetTiles(layer);
 			foreach (var t in tiles)
 			{
-				if (t.Value == Tile.Wall)
-				{
-					InstantiatePrefab(t.Key, t.Value);
-				}
+				InstantiatePrefab(t.Key, t.Value);
 			}
 		}
 
