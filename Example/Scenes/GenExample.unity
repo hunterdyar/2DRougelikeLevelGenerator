@@ -382,60 +382,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _settings:
-    seed: b
+    seed: d
     LevelWidth: 50
     LevelHeight: 50
     globalSpawnOffset: {x: 0, y: 0, z: 0}
   generateOnStart: 1
   _generationLayersSetup:
   - layer: base
-    type: 2
-    maxWalkers: 5
-    chanceToSpawnNewWalker: 0.135
-    chanceToDestroyWalker: 0.164
-    desiredPercentageFloorFill: 0.545
-    scale: 0.1
-    thickness: 1
-    repeat: 4
-    otherLayer: 
-    mergeOperation: 0
-    tile: 0
-  - layer: base
-    type: 6
+    type: 10
     maxWalkers: 5
     chanceToSpawnNewWalker: 0.135
     chanceToDestroyWalker: 0.164
     desiredPercentageFloorFill: 0.091
-    scale: 0.1
+    scale: 3
     thickness: 1
     repeat: 4
     otherLayer: 
     mergeOperation: 0
-    tile: 0
-  - layer: base
-    type: 3
-    maxWalkers: 5
-    chanceToSpawnNewWalker: 0.135
-    chanceToDestroyWalker: 0.164
-    desiredPercentageFloorFill: 0.091
-    scale: 0.1
-    thickness: 1
-    repeat: 4
-    otherLayer: 
-    mergeOperation: 0
-    tile: 0
-  - layer: base
-    type: 9
-    maxWalkers: 5
-    chanceToSpawnNewWalker: 0.135
-    chanceToDestroyWalker: 0.164
-    desiredPercentageFloorFill: 0.091
-    scale: 0.1
-    thickness: 1
-    repeat: 4
-    otherLayer: 
-    mergeOperation: 0
-    tile: 0
+    tile: 1
   _builders:
   - layer: base
     parent: {fileID: 919133141}

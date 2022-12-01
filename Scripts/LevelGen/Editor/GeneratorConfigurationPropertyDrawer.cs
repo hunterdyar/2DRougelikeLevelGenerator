@@ -96,6 +96,11 @@ namespace RougeLevelGen.Editor
 				var tile = property.FindPropertyRelative("tile");
 				Rect r = new Rect(position.x, y, position.width, EditorGUIUtility.singleLineHeight);
 				EditorGUI.PropertyField(r, tile, new GUIContent("Remove all but largest Islands of"));
+			}else if (v == GeneratorTypes.PoissonDisk)
+			{
+				var scale = property.FindPropertyRelative("scale");
+				Rect r = new Rect(position.x, y, position.width, EditorGUIUtility.singleLineHeight);
+				EditorGUI.PropertyField(r, scale, new GUIContent("Test Radius"));
 			}
 
 			// Draw label

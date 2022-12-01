@@ -10,7 +10,7 @@ namespace RougeLevelGen
 		Smooth,
 		[InspectorName("Generators/Noise")]
 		Noise,
-		[InspectorName("Generators/Cellular Automata")]
+		[InspectorName("Modifiers/Cellular Automata")]
 		SimpleCellularAutomata,
 		[InspectorName("Modifiers/Invert")]
 		Invert,
@@ -23,6 +23,8 @@ namespace RougeLevelGen
 		[InspectorName("Generators/Solid Fill")]
 		Fill,
 		[InspectorName("Modifiers/Fill Islands")]
-		FillIslands
+		FillIslands,
+		[InspectorName("Generators/Poisson Disk Distribution")]
+		PoissonDisk,
 	}
 }

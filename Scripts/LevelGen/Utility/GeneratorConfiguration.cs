@@ -56,6 +56,9 @@ namespace RougeLevelGen
 			}else if (type == GeneratorTypes.FillIslands)
 			{
 				return new IslandProcessGenerator(layer, levelGenerator, tile);
+			}else if (type == GeneratorTypes.PoissonDisk)
+			{
+				return new PoissonDisk(layer, levelGenerator,scale);
 			}
 
 			return new DrunkWalkGenerator(layer, levelGenerator, maxWalkers, chanceToSpawnNewWalker, chanceToDestroyWalker, desiredPercentageFloorFill);
