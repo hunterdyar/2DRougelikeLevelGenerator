@@ -52,7 +52,6 @@ namespace RougeLevelGen
 
 		private bool IsNoFloorsNearby(Vector2Int center)
 		{
-			//todo: get a circle around point ki
 			int top = Mathf.CeilToInt(center.y - _radius);
 			int bottom = Mathf.FloorToInt(center.y + _radius);
 			int left = Mathf.CeilToInt(center.x - _radius);

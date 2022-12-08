@@ -15,9 +15,7 @@ namespace RougeLevelGen
 			_otherLayer = other;
 			_mergeOperation = mergeOperation;
 		}
-
-		//todo: validate
-
+		
 		public override IEnumerator Generate()
 		{
 			if (!LevelGenerator.HasLayer(_otherLayer))

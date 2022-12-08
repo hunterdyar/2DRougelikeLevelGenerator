@@ -389,6 +389,42 @@ MonoBehaviour:
   generateOnStart: 1
   _generationLayersSetup:
   - layer: base
+    type: 2
+    maxWalkers: 5
+    chanceToSpawnNewWalker: 0.135
+    chanceToDestroyWalker: 0.164
+    desiredPercentageFloorFill: 0.091
+    scale: 3
+    thickness: 1
+    repeat: 4
+    otherLayer: 
+    mergeOperation: 0
+    tile: 1
+  - layer: base
+    type: 6
+    maxWalkers: 5
+    chanceToSpawnNewWalker: 0.135
+    chanceToDestroyWalker: 0.164
+    desiredPercentageFloorFill: 0.091
+    scale: 3
+    thickness: 1
+    repeat: 4
+    otherLayer: 
+    mergeOperation: 0
+    tile: 1
+  - layer: base
+    type: 3
+    maxWalkers: 5
+    chanceToSpawnNewWalker: 0.135
+    chanceToDestroyWalker: 0.164
+    desiredPercentageFloorFill: 0.091
+    scale: 3
+    thickness: 1
+    repeat: 4
+    otherLayer: 
+    mergeOperation: 0
+    tile: 1
+  - layer: items
     type: 10
     maxWalkers: 5
     chanceToSpawnNewWalker: 0.135
@@ -400,12 +436,29 @@ MonoBehaviour:
     otherLayer: 
     mergeOperation: 0
     tile: 1
+  - layer: items
+    type: 7
+    maxWalkers: 5
+    chanceToSpawnNewWalker: 0.135
+    chanceToDestroyWalker: 0.164
+    desiredPercentageFloorFill: 0.091
+    scale: 3
+    thickness: 1
+    repeat: 4
+    otherLayer: base
+    mergeOperation: 2
+    tile: 1
   _builders:
   - layer: base
     parent: {fileID: 919133141}
     offset: {x: 0, y: 0, z: 0}
     WallPrefab: {fileID: 2967708919665847277, guid: 2ad73532677acd54f952b68f6d4849b5, type: 3}
     FloorPrefab: {fileID: 0}
+  - layer: items
+    parent: {fileID: 919133141}
+    offset: {x: 0, y: 0, z: 0}
+    WallPrefab: {fileID: 0}
+    FloorPrefab: {fileID: 2967708919665847277, guid: 319ad81e9129ce443ad4bfa2a211d8a6, type: 3}
 --- !u!4 &919133141
 Transform:
   m_ObjectHideFlags: 0

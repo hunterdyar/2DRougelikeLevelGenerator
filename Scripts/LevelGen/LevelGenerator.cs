@@ -71,7 +71,6 @@ namespace RougeLevelGen
             {
                 ProgressStage = g.ToString();
                 yield return StartCoroutine(g.Generate());
-                //todo: generation layers. A dictionary of dictionaries.
             }
 
             ProgressStage = "Building";
