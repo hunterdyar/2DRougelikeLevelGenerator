@@ -1,0 +1,22 @@
+﻿{
+  "name": "com.hdyar.roguelevelgen",
+  "version": "0.0.1",
+  "displayName": "2D Roguelike Level Generator",
+  "description": "Create a sequence of rules to generate 2D levels.",
+  "unity": "2021.1",
+  "unityRelease": "0b1",
+  "documentationUrl": "https://github.com/hunterdyar/2DRougelikeLevelGenerator",
+  "licensesUrl": "https://example.com/licensing.html",
+  "samples": [
+    {
+      "displayName": "Basic Example 2D",
+      "description": "Simple 2D Setup",
+      "path": "Samples~/Basic2D"
+    }
+  ],
+  "author": {
+    "name": "Hunter Dyar",
+    "email": "me@hdyar.com",
+    "url": "https://www.hdyar.com"
+  }
+}

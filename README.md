@@ -1,7 +1,7 @@
 # 2DRougelikeLevelGenerator
 Simple procedural level generation in Unity
 
-![Animated gif of generation](Documentation/gen01.gif)
+![Animated gif of generation](Documentation~/gen01.gif)
 
 ## How it Works
 The Generator first loops creates solid squares of "Wall", one for each layer in the list of generators.
@@ -36,12 +36,12 @@ See project goals. Before/After that:
 ## Cellular Automata + Island Culling
 Start with Noise, then a Level Edges, then cellular automata.
 
-![Cellular Automata + Settings](Documentation/cull1.png)
+![Cellular Automata + Settings](Documentation~/cull1.png)
 
 Then, use the "Fill Islands" to fill all but the largest continous section of each type.
 
-![With fill islands for floors](Documentation/cull2.png)
+![With fill islands for floors](Documentation~/cull2.png)
 
 You may want to remove islands for both floors and walls.
 
-![With fill islands for walls](Documentation/cull3.png)
+![With fill islands for walls](Documentation~/cull3.png)
