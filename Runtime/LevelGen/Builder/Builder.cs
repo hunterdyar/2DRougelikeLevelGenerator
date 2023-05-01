@@ -8,6 +8,7 @@ namespace HDyar.RougeLevelGen
 	[Serializable]
 	public class Builder
 	{
+		//todo: auto set layer correctly if only one in generator.
 		public string layer;
 		public Transform parent;
 		public Vector3 offset;
