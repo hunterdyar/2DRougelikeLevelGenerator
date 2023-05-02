@@ -12,7 +12,9 @@ namespace HDyar.RougeLevelGen
 		[Min(0)]
 		public int LevelHeight;
 
-		public Swizzle swizzle;
+		//todo: add dependency on grid to package information.
+		[Tooltip("Unity Grid component, used for world/cell mapping.")]
+		public Grid grid;
 
 		[Tooltip("Applied After Swizzle")]
 		public Vector3 globalSpawnOffset;
@@ -41,31 +43,30 @@ namespace HDyar.RougeLevelGen
 		}
 
 		/// <summary>
-		///  Converts a grid space (Vector2Int arbitrary space) to World space (scaled, swizzled, and offset).
+		///  Converts a grid space (Vector2Int arbitrary space) to World space. Wrapper for the Unity Grid's cell-to-world function.
 		/// </summary>
 		/// <param name="gridPos">Input position in grid space.</param>
-		/// <param name="swizzle">Puzzle generation XY coordinates converted to these coordinates. Default to XY.</param>
-		/// <param name="planePos">Position on non-generated axis. If generation is XY, this is the z position in world space, before global offset.</param>
 		/// <returns></returns>
-		public Vector3 GridToWorld(Vector2Int gridPos, float planePos = 0)
+		public Vector3 GridToWorld(Vector2Int gridPos)
 		{
-			switch (swizzle)
-			{
-				case Swizzle.XY:
-				default:
-					return new Vector3(gridPos.x, gridPos.y, planePos) + globalSpawnOffset;
-				case Swizzle.XZ:
-					return new Vector3(gridPos.x, planePos, gridPos.y) + globalSpawnOffset;
-				case Swizzle.YX:
-					return new Vector3(gridPos.y, gridPos.x, planePos) + globalSpawnOffset;
-				case Swizzle.YZ:
-					return new Vector3(planePos, gridPos.x,gridPos.y) + globalSpawnOffset;
-				case Swizzle.ZX:
-					return new Vector3(gridPos.y, planePos, gridPos.x) + globalSpawnOffset;
-				case Swizzle.ZY:
-					return new Vector3(planePos, gridPos.y, gridPos.x) + globalSpawnOffset;
-			}
-			
+			return grid.CellToWorld((Vector3Int)gridPos);
+			// switch (swizzle)
+			// {
+			// 	case Swizzle.XY:
+			// 	default:
+			// 		return new Vector3(gridPos.x, gridPos.y, planePos) + globalSpawnOffset;
+			// 	case Swizzle.XZ:
+			// 		return new Vector3(gridPos.x, planePos, gridPos.y) + globalSpawnOffset;
+			// 	case Swizzle.YX:
+			// 		return new Vector3(gridPos.y, gridPos.x, planePos) + globalSpawnOffset;
+			// 	case Swizzle.YZ:
+			// 		return new Vector3(planePos, gridPos.x,gridPos.y) + globalSpawnOffset;
+			// 	case Swizzle.ZX:
+			// 		return new Vector3(gridPos.y, planePos, gridPos.x) + globalSpawnOffset;
+			// 	case Swizzle.ZY:
+			// 		return new Vector3(planePos, gridPos.y, gridPos.x) + globalSpawnOffset;
+			// }
+
 		}
 	}
 }
