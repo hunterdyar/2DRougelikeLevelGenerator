@@ -5,7 +5,7 @@ namespace HDyar.RougeLevelGen
 {
 	public class LevelEdgesGenerator : Generator
 	{
-		private int _thickness;
+		private int _thickness = 1;
 		private Tile _type = Tile.Wall;
 
 		public LevelEdgesGenerator(string layer, LevelGenerator levelGenerator, int thickness) : base(layer, levelGenerator)
@@ -22,7 +22,7 @@ namespace HDyar.RougeLevelGen
 				for (int t = 0; t < _thickness; t++)
 				{
 					SetTile(new Vector2Int(x, t), _type);
-					SetTile(new Vector2Int(x,Settings.LevelWidth-1-t), _type);
+					SetTile(new Vector2Int(x,Settings.LevelHeight-1-t), _type);
 				}
 			}
 
@@ -31,7 +31,7 @@ namespace HDyar.RougeLevelGen
 				for (int t = 0; t < _thickness; t++)
 				{
 					SetTile(new Vector2Int(t, y), _type);
-					SetTile(new Vector2Int(Settings.LevelHeight - 1 - t,y), _type);
+					SetTile(new Vector2Int(Settings.LevelWidth - 1 - t,y), _type);
 				}
 			}
 
