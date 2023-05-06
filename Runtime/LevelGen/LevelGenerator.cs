@@ -12,7 +12,8 @@ namespace HDyar.RougeLevelGen
         public static System.Random Random;
         public static bool DebugWatch = true;
         public static string ProgressStage;
-        
+
+        public Action OnGenerationComplete;
         //serialized
         public LevelGenSettings Settings => _settings;
         [SerializeField] private LevelGenSettings _settings;
@@ -83,7 +84,7 @@ namespace HDyar.RougeLevelGen
             }
 
             ProgressStage = "Complete";
-
+            OnGenerationComplete?.Invoke();
         }
 
         private void InitiateGenerators()
